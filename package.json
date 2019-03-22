@@ -15,6 +15,7 @@
     "canvas": "^2.3.1",
     "coffee-register": "^2.2.0",
     "coffee-script": "^1.12.7",
+    "colorsys": "^1.0.22",
     "element-ui": "^2.3.4",
     "file-saver": "^2.0.1",
     "flex.css": "^1.1.7",

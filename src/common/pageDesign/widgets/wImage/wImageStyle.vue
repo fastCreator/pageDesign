@@ -12,6 +12,11 @@
       <el-collapse-item title="样式设置" name="2">
         <number-slider
           class="style-item"
+          label="亮度"
+          v-model="innerElement.brightness"
+          :maxValue="200" />
+        <number-slider
+          class="style-item"
           label="旋转角度"
           v-model="innerElement.rotate"
           :maxValue="360"

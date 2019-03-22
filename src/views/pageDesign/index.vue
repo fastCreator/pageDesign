@@ -1,6 +1,12 @@
 <template>
-  <div id="page-design-index" ref="pageDesignIndex">
-    <div class="top-nav" :style="style">
+  <div
+    id="page-design-index"
+    ref="pageDesignIndex"
+  >
+    <div
+      class="top-nav"
+      :style="style"
+    >
       <div class="top-nav-wrap">
         <div class="top-back">
           <i class="iconfont icon-arrow-left"></i>
@@ -9,11 +15,18 @@
           设计
         </div>
         <div class="top-icon-wrap">
-          <div class="top-icon" @click="save">
+          <div
+            class="top-icon"
+            @click="save"
+          >
             <i class="iconfont icon-save"></i>
             保存
           </div>
-          <div class="top-icon" @click="save" v-if="false">
+          <div
+            class="top-icon"
+            @click="save"
+            v-if="false"
+          >
             <i class="iconfont icon-publish"></i>
             发布
           </div>
@@ -22,7 +35,10 @@
     </div>
     <div class="page-design-index-wrap">
       <widget-panel></widget-panel>
-      <page-design class="page-design-wrap" pageDesignCanvasId="page-design-canvas"></page-design>
+      <page-design
+        class="page-design-wrap"
+        pageDesignCanvasId="page-design-canvas"
+      ></page-design>
       <style-panel></style-panel>
     </div>
     <div class="operation">
@@ -30,14 +46,16 @@
         <li
           class="operation-item"
           :class="{'disable' : !undoable}"
-          @click="undoable ? handle('undo') : ''">
+          @click="undoable ? handle('undo') : ''"
+        >
           <i class="iconfont icon-undo"></i>
           <p>撤销</p>
         </li>
         <li
           class="operation-item"
           :class="{'disable' : !redoable}"
-          @click="redoable ? handle('redo') : ''">
+          @click="redoable ? handle('redo') : ''"
+        >
           <i class="iconfont icon-redo"></i>
           <p>重做</p>
         </li>
@@ -46,21 +64,24 @@
         <li
           class="operation-item"
           :class="{'disable' : dActiveElement.uuid === '-1'}"
-          @click="dActiveElement.uuid !== '-1' ? handle('copy') : ''">
+          @click="dActiveElement.uuid !== '-1' ? handle('copy') : ''"
+        >
           <i class="iconfont icon-copy"></i>
           <p>复制</p>
         </li>
         <li
           class="operation-item"
           :class="{'disable' : dCopyElement.length === 0}"
-          @click="dCopyElement.length !== 0 ? handle('paste') : ''">
+          @click="dCopyElement.length !== 0 ? handle('paste') : ''"
+        >
           <i class="iconfont icon-paste"></i>
           <p>粘贴</p>
         </li>
         <li
           class="operation-item"
           :class="{'disable' : dActiveElement.uuid === '-1'}"
-          @click="dActiveElement.uuid !== '-1' ? handle('delete') : ''">
+          @click="dActiveElement.uuid !== '-1' ? handle('delete') : ''"
+        >
           <i class="iconfont icon-delete"></i>
           <p>删除</p>
         </li>
@@ -69,57 +90,87 @@
         <li
           class="operation-item"
           @click.stop="showGridSizeList = !showGridSizeList"
-          :class="{'operation-item-active' : showGridSizeList}">
+          :class="{'operation-item-active' : showGridSizeList}"
+        >
           <i class="iconfont icon-ref-grid"></i>
           <p>网格</p>
-          <ul class="grid-selecter" v-show="showGridSizeList">
+          <ul
+            class="grid-selecter"
+            v-show="showGridSizeList"
+          >
             <li
               v-for="(item, index) in gridSizeList"
               :key="index"
               class="grid-item"
               :class="{'grid-item-active' : gridSizeIndex === index}"
-              @click="gridSizeIndex = index">
+              @click="gridSizeIndex = index"
+            >
               <span>{{ item.value }}</span>
-              <i class="iconfont icon-selected" v-if="gridSizeIndex === index"></i>
+              <i
+                class="iconfont icon-selected"
+                v-if="gridSizeIndex === index"
+              ></i>
             </li>
           </ul>
         </li>
         <li
           class="operation-item"
           @click.stop="showRefLine(!dShowRefLine)"
-          :class="{'operation-item-active' : dShowRefLine}">
+          :class="{'operation-item-active' : dShowRefLine}"
+        >
           <i class="iconfont icon-ref-line"></i>
           <p>吸附</p>
         </li>
       </ul>
     </div>
-    <zoom-control/>
-    <div class="menu-bg" id="menu-bg" v-show="showMenuBg">
+    <zoom-control />
+    <div
+      class="menu-bg"
+      id="menu-bg"
+      v-show="showMenuBg"
+    >
       <ul
         class="menu-list"
         ref="menuList"
         :style="{
           left: menuList.left + 'px',
           top: menuList.top + 'px'
-        }">
+        }"
+      >
         <li
           class="menu-item"
           :class="{'disable-menu': dCopyElement.length === 0 && item.type === 'paste'}"
           v-for="(item, index) in menuList.list"
           :key="index"
-          @click="selectMenu(item.type)">
+          @click="selectMenu(item.type)"
+        >
           {{ item.text }}
         </li>
       </ul>
     </div>
-    <div class="fill-info-wrap" v-if="fillInfoing">
-      <div class="fill-info-content" v-loading="publishing">
-        <el-steps :active="active[fillStep]" finish-status="success" align-center>
+    <div
+      class="fill-info-wrap"
+      v-if="fillInfoing"
+    >
+      <div
+        class="fill-info-content"
+        v-loading="publishing"
+      >
+        <el-steps
+          :active="active[fillStep]"
+          finish-status="success"
+          align-center
+        >
           <el-step :title="message['1']"></el-step>
           <!-- <el-step :title="message['2']"></el-step>
           <el-step :title="message['3']"></el-step> -->
         </el-steps>
-        <div class="fill-info-step" v-if="fillStep === 1" v-loading="true">
+        <div
+          class="fill-info-step"
+          v-if="fillStep === 1"
+          v-loading="false"
+        >
+          <page-preview :dWidgets="savedWidgets"></page-preview>
         </div>
         <!-- <div class="fill-info-step" v-show="fillStep === 2 || fillStep === 3">
           <div id="cover-wrap">
@@ -134,15 +185,28 @@
             关闭
           </div>
         </div> -->
-        <div class="fill-info-step" v-show="fillStep === 2 || fillStep === 3">
+        <div
+          class="fill-info-step"
+          v-show="fillStep === 2 || fillStep === 3"
+        >
+
           <div id="cover-wrap">
             <img id="cover" />
           </div>
-          <div class="publish-btn" @click="saveImg">
+          <div
+            class="publish-btn"
+            @click="saveImg"
+          >
             <span v-show="!publishing">保存图片</span>
-            <i class="el-icon-loading" v-show="publishing"></i>
+            <i
+              class="el-icon-loading"
+              v-show="publishing"
+            ></i>
           </div>
-          <div class="close-publish" @click="closePublish">
+          <div
+            class="close-publish"
+            @click="closePublish"
+          >
             关闭
           </div>
         </div>
@@ -152,55 +216,54 @@
 </template>
 
 <script>
-import api from 'API'
-import 'COMMON/pageDesign/index'
-import wGroup from 'COMMON/pageDesign/widgets/wGroup/wGroup'
-import { shortcuts } from 'MIXINS/shortcuts'
-import html2canvas from 'html2canvas'
-import savePSD from './savePSD'
+import api from "API";
+import toDealBase64 from 'UTIL/toDealBase64'
+import "COMMON/pageDesign/index";
+import wGroup from "COMMON/pageDesign/widgets/wGroup/wGroup";
+import { shortcuts } from "MIXINS/shortcuts";
+import html2canvas from "html2canvas";
+import savePSD from "./savePSD";
 
-import {
-  mapGetters,
-  mapActions
-} from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'page-design-index',
-  data () {
+  name: "page-design-index",
+  data() {
     return {
+      savedWidgets: [],
       style: {
-        left: '0px'
+        left: "0px"
       },
       gridSizeList: [
         {
           width: 0,
           height: 0,
-          value: '无'
+          value: "无"
         },
         {
           width: 10,
           height: 10,
-          value: '10x10'
+          value: "10x10"
         },
         {
           width: 20,
           height: 20,
-          value: '20x20'
+          value: "20x20"
         },
         {
           width: 50,
           height: 50,
-          value: '50x50'
+          value: "50x50"
         },
         {
           width: 75,
           height: 75,
-          value: '75x75'
+          value: "75x75"
         },
         {
           width: 100,
           height: 100,
-          value: '100x100'
+          value: "100x100"
         }
       ],
       gridSizeIndex: 0,
@@ -213,227 +276,241 @@ export default {
       },
       widgetMenu: [
         {
-          type: 'copy',
-          text: '复制'
+          type: "copy",
+          text: "复制"
         },
         {
-          type: 'paste',
-          text: '粘贴'
+          type: "paste",
+          text: "粘贴"
         },
         {
-          type: 'index-up',
-          text: '上移一层'
+          type: "index-up",
+          text: "上移一层"
         },
         {
-          type: 'index-down',
-          text: '下移一层'
+          type: "index-down",
+          text: "下移一层"
         },
         {
-          type: 'del',
-          text: '删除'
+          type: "del",
+          text: "删除"
         }
       ],
       pageMenu: [
         {
-          type: 'paste',
-          text: '粘贴'
+          type: "paste",
+          text: "粘贴"
         }
       ],
       fillInfoing: false,
       message: {
-        '1': '生成封面图',
-        '2': '填写模板信息',
-        '3': '发布模板'
+        "1": "生成封面图",
+        "2": "填写模板信息",
+        "3": "发布模板"
       },
       active: {
-        '1': 0,
-        '2': 1,
-        '3': 2
+        "1": 0,
+        "2": 1,
+        "3": 2
       },
       fillStep: 1,
       formParams: {},
-      title: '',
+      title: "",
       publishing: false
-    }
+    };
   },
   mixins: [shortcuts],
   computed: {
     ...mapGetters([
-      'dHistoryParams',
-      'dActiveElement',
-      'dShowRefLine',
-      'dCopyElement',
-      'dPage',
-      'dAltDown',
-      'dWidgets',
-      'dZoom'
+      "dHistoryParams",
+      "dActiveElement",
+      "dShowRefLine",
+      "dCopyElement",
+      "dPage",
+      "dAltDown",
+      "dWidgets",
+      "dZoom"
     ]),
     undoable() {
-      return !(this.dHistoryParams.index === -1 || (this.dHistoryParams === 0 && this.dHistoryParams.length === 10))
+      return !(
+        this.dHistoryParams.index === -1 ||
+        (this.dHistoryParams === 0 && this.dHistoryParams.length === 10)
+      );
     },
     redoable() {
-      return !(this.dHistoryParams.index === this.dHistoryParams.length - 1)
+      return !(this.dHistoryParams.index === this.dHistoryParams.length - 1);
     }
   },
-  mounted () {
+  mounted() {
     // 初始化激活的控件为page
     this.selectWidget({
-      uuid: '-1'
-    })
-    this.initGroupJson(JSON.stringify(wGroup.setting))
-    window.addEventListener('scroll', this.fixTopBarScroll)
-    window.addEventListener('click', this.clickListener)
-    document.addEventListener('keydown', this.handleKeydowm, false)
-    document.addEventListener('keyup', this.handleKeyup, false)
-    document.oncontextmenu = this.mouseRightClick
+      uuid: "-1"
+    });
+    this.initGroupJson(JSON.stringify(wGroup.setting));
+    window.addEventListener("scroll", this.fixTopBarScroll);
+    window.addEventListener("click", this.clickListener);
+    document.addEventListener("keydown", this.handleKeydowm, false);
+    document.addEventListener("keyup", this.handleKeyup, false);
+    document.oncontextmenu = this.mouseRightClick;
   },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.fixTopBarScroll)
-    window.removeEventListener('click', this.clickListener)
-    document.removeEventListener('keydown', this.handleKeydowm, false)
-    document.removeEventListener('keyup', this.handleKeyup, false)
-    document.oncontextmenu = null
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.fixTopBarScroll);
+    window.removeEventListener("click", this.clickListener);
+    document.removeEventListener("keydown", this.handleKeydowm, false);
+    document.removeEventListener("keyup", this.handleKeyup, false);
+    document.oncontextmenu = null;
   },
   created() {
-    this.setPageData()
+    this.setPageData();
   },
   watch: {
-    gridSizeIndex (index) {
+    gridSizeIndex(index) {
       this.updateGridSize({
         width: this.gridSizeList[index].width,
         height: this.gridSizeList[index].height
-      })
+      });
     }
   },
   methods: {
     ...mapActions([
-      'initPages',
-      'updateGridSize',
-      'handleHistory',
-      'selectWidget',
-      'deleteWidget',
-      'copyWidget',
-      'showRefLine',
-      'pasteWidget',
-      'updateWidgetData',
-      'getWidgetJsonData',
-      'initGroupJson',
-      'updateLayerIndex',
-      'ungroup',
-      'updateZoom'
+      "initPages",
+      "updateGridSize",
+      "handleHistory",
+      "selectWidget",
+      "deleteWidget",
+      "copyWidget",
+      "showRefLine",
+      "pasteWidget",
+      "updateWidgetData",
+      "getWidgetJsonData",
+      "initGroupJson",
+      "updateLayerIndex",
+      "ungroup",
+      "updateZoom"
     ]),
-    async setPageData(){
-      let data = await api.getPageData()
-      this.initPages(data)
+    async setPageData() {
+      let data = await api.getPageData();
+      this.initPages(data);
     },
-    fixTopBarScroll () {
-      const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft
-      this.style.left = `-${scrollLeft}px`
+    fixTopBarScroll() {
+      const scrollLeft =
+        document.documentElement.scrollLeft || document.body.scrollLeft;
+      this.style.left = `-${scrollLeft}px`;
     },
-    clickListener (e) {
-      this.showGridSizeList = false
+    clickListener(e) {
+      this.showGridSizeList = false;
     },
-    handle (action) {
+    handle(action) {
       switch (action) {
-        case 'undo':
-        case 'redo':
-          this.handleHistory(action)
-          break
-        case 'delete':
-          this.deleteWidget()
-          break
-        case 'copy':
-          this.copyWidget()
-          break
-        case 'paste':
-          this.pasteWidget()
-          break
+        case "undo":
+        case "redo":
+          this.handleHistory(action);
+          break;
+        case "delete":
+          this.deleteWidget();
+          break;
+        case "copy":
+          this.copyWidget();
+          break;
+        case "paste":
+          this.pasteWidget();
+          break;
       }
     },
-    mouseRightClick (e) {
-      e.stopPropagation()
-      e.preventDefault()
+    mouseRightClick(e) {
+      e.stopPropagation();
+      e.preventDefault();
       if (this.showMenuBg) {
-        this.showMenuBg = false
-        return
+        this.showMenuBg = false;
+        return;
       }
-      let target = e.target
-      let type = target.getAttribute('data-type')
+      let target = e.target;
+      let type = target.getAttribute("data-type");
       if (type) {
-        let uuid = target.getAttribute('data-uuid')// 设置选中元素
+        let uuid = target.getAttribute("data-uuid"); // 设置选中元素
 
-        if (uuid !== '-1' && !this.dAltDown) {
-          let widget = this.dWidgets.find(item => item.uuid === uuid)
-          if (widget.parent !== '-1' && widget.parent !== this.dActiveElement.uuid && widget.parent !== this.dActiveElement.parent) {
-            uuid = widget.parent
+        if (uuid !== "-1" && !this.dAltDown) {
+          let widget = this.dWidgets.find(item => item.uuid === uuid);
+          if (
+            widget.parent !== "-1" &&
+            widget.parent !== this.dActiveElement.uuid &&
+            widget.parent !== this.dActiveElement.parent
+          ) {
+            uuid = widget.parent;
           }
         }
         this.selectWidget({
-          uuid: uuid || '-1'
-        })
-        this.showMenu(e)
+          uuid: uuid || "-1"
+        });
+        this.showMenu(e);
       }
     },
-    showMenu (e) {
-      let isPage = this.dActiveElement.uuid === '-1'
-      this.menuList.list = isPage ? this.pageMenu : this.widgetMenu
+    showMenu(e) {
+      let isPage = this.dActiveElement.uuid === "-1";
+      this.menuList.list = isPage ? this.pageMenu : this.widgetMenu;
       if (this.dActiveElement.isContainer) {
-        let ungroup = [{
-          type: 'ungroup',
-          text: '取消组合'
-        }]
-        this.menuList.list = ungroup.concat(this.menuList.list)
-      }
-      this.showMenuBg = true
-      document.getElementById('menu-bg').addEventListener('click', this.closeMenu, false)
-      let mx = e.pageX
-      let my = e.pageY
-      let listWidth = 120
-      if (mx + listWidth > window.innerWidth) {
-        mx -= listWidth
-      }
-      let listHeight = (14 + 10) * this.menuList.list.length + 10
-      if (my + listHeight > window.innerHeight) {
-        my -= listHeight
-      }
-      this.menuList.left = mx
-      this.menuList.top = my
-    },
-    closeMenu () {
-      this.showMenuBg = false
-      document.getElementById('menu-bg').removeEventListener('click', this.closeMenu, false)
-    },
-    selectMenu (type) {
-      switch (type) {
-        case 'copy':
-          this.copyWidget()
-          break
-        case 'paste':
-          if (this.dCopyElement.length === 0) {
-            return
+        let ungroup = [
+          {
+            type: "ungroup",
+            text: "取消组合"
           }
-          this.pasteWidget()
-          break
-        case 'index-up':
+        ];
+        this.menuList.list = ungroup.concat(this.menuList.list);
+      }
+      this.showMenuBg = true;
+      document
+        .getElementById("menu-bg")
+        .addEventListener("click", this.closeMenu, false);
+      let mx = e.pageX;
+      let my = e.pageY;
+      let listWidth = 120;
+      if (mx + listWidth > window.innerWidth) {
+        mx -= listWidth;
+      }
+      let listHeight = (14 + 10) * this.menuList.list.length + 10;
+      if (my + listHeight > window.innerHeight) {
+        my -= listHeight;
+      }
+      this.menuList.left = mx;
+      this.menuList.top = my;
+    },
+    closeMenu() {
+      this.showMenuBg = false;
+      document
+        .getElementById("menu-bg")
+        .removeEventListener("click", this.closeMenu, false);
+    },
+    selectMenu(type) {
+      switch (type) {
+        case "copy":
+          this.copyWidget();
+          break;
+        case "paste":
+          if (this.dCopyElement.length === 0) {
+            return;
+          }
+          this.pasteWidget();
+          break;
+        case "index-up":
           this.updateLayerIndex({
             uuid: this.dActiveElement.uuid,
             value: 1,
             isGroup: this.dActiveElement.isContainer
-          })
-          break
-        case 'index-down':
+          });
+          break;
+        case "index-down":
           this.updateLayerIndex({
             uuid: this.dActiveElement.uuid,
             value: -1,
             isGroup: this.dActiveElement.isContainer
-          })
-          break
-        case 'del':
-          this.deleteWidget()
-          break
-        case 'ungroup':
-        this.ungroup(this.dActiveElement.uuid)
-          break
+          });
+          break;
+        case "del":
+          this.deleteWidget();
+          break;
+        case "ungroup":
+          this.ungroup(this.dActiveElement.uuid);
+          break;
       }
     },
     // save () {
@@ -468,105 +545,117 @@ export default {
     //     })
     //   }).catch(err => this.saveError(err.msg))
     // },
-    publish () {
+    publish() {
       if (this.publishing) {
-        return
+        return;
       }
       if (!this.title) {
         this.$message({
           showClose: true,
-          message: '请输入名称',
-          type: 'error'
-        })
-        return
+          message: "请输入名称",
+          type: "error"
+        });
+        return;
       }
-      this.publishing = true
-      this.uploadToQiniu(this.formParams).then((qiniuData) => {
-        this.getWidgetJsonData().then((json) => {
-          let templateData = {
-            title: this.title,
-            template: JSON.stringify(json),
-            cover: qiniuData.imgUrl
-          }
-          this.fillStep = 3
-          this.createDesignTemplate(templateData).then(data => {
-            this.fillStep = 4
-            this.publishing = false
-            this.fillInfoing = false
-            this.$message({
-              showClose: true,
-              message: '发布完成',
-              type: 'success'
-            })
-          }).catch(err => {
-            this.publishing = false
-            if (!err.code === -2) {
-              this.saveError(err.msg)
-            }
-          })
+      this.publishing = true;
+      this.uploadToQiniu(this.formParams)
+        .then(qiniuData => {
+          this.getWidgetJsonData().then(json => {
+            let templateData = {
+              title: this.title,
+              template: JSON.stringify(json),
+              cover: qiniuData.imgUrl
+            };
+            this.fillStep = 3;
+            this.createDesignTemplate(templateData)
+              .then(data => {
+                this.fillStep = 4;
+                this.publishing = false;
+                this.fillInfoing = false;
+                this.$message({
+                  showClose: true,
+                  message: "发布完成",
+                  type: "success"
+                });
+              })
+              .catch(err => {
+                this.publishing = false;
+                if (!err.code === -2) {
+                  this.saveError(err.msg);
+                }
+              });
+          });
         })
-      }).catch(err => this.saveError(err.msg))
+        .catch(err => this.saveError(err.msg));
     },
-    closePublish () {
-      this.publishing = false
-      this.fillInfoing = false
-      this.fillStep = 1
+    closePublish() {
+      this.publishing = false;
+      this.fillInfoing = false;
+      this.fillStep = 1;
     },
-    saveError (message) {
-      this.publishing = false
-      this.fillInfoing = false
-      this.fillStep = 1
+    saveError(message) {
+      this.publishing = false;
+      this.fillInfoing = false;
+      this.fillStep = 1;
       this.$message({
         showClose: true,
         message: message,
-        type: 'error'
-      })
+        type: "error"
+      });
     },
-    fileOrBlobToDataURL (obj, cb) {
-      let a = new FileReader()
-      a.readAsDataURL(obj)
+    fileOrBlobToDataURL(obj, cb) {
+      let a = new FileReader();
+      a.readAsDataURL(obj);
       a.onload = e => {
-        cb(e.target.result)
-      }
+        cb(e.target.result);
+      };
     },
-    blobToImage (blob, cb){
+    blobToImage(blob, cb) {
       this.fileOrBlobToDataURL(blob, dataurl => {
-        cb(dataurl)
-      })
+        cb(dataurl);
+      });
     },
-    save () {
-      this.fillStep = 1
-      this.fillInfoing = true
-      let nowGrideSizeIndex = this.gridSizeIndex
-      let nowZoom = this.dZoom
+    //保存按钮
+    async save() {
+      this.savedWidgets = JSON.parse(JSON.stringify(this.dWidgets));
+      for (let i = 0; i < this.savedWidgets.length; i++) {
+        let it = this.savedWidgets[i]
+        if (it.type === "w-image") {
+          it.imgUrl = await toDealBase64(it.imgUrl);
+        }
+      }
+      this.fillStep = 1;
+      this.fillInfoing = true;
+      let nowGrideSizeIndex = this.gridSizeIndex;
+      let nowZoom = this.dZoom;
       // 取消选中元素
       this.selectWidget({
-        uuid: '-1'
-      })
-      this.gridSizeIndex = 0
-      this.updateZoom(100)
+        uuid: "-1"
+      });
+      this.gridSizeIndex = 0;
+      this.updateZoom(100);
       let opts = {
-        useCORS: true, // 跨域图片
-      }
-      let _this = this
-      setTimeout(function() {
-        html2canvas(document.getElementById('page-design-canvas'), opts).then((canvas) => {
-          canvas.toBlob((blob) => {
-            _this.blobToImage(blob, data => {
-              document.getElementById('cover').src = data
-            })
+        useCORS: true // 跨域图片
+      };
+      let _this = this;
+      // setTimeout(function() {
+      //   html2canvas(document.getElementById('page-design-canvas'), opts).then((canvas) => {
+      //     canvas.toBlob((blob) => {
+      //       _this.blobToImage(blob, data => {
+      //         document.getElementById('cover').src = data
+      //       })
 
-            _this.fillStep = 2
-            _this.gridSizeIndex = nowGrideSizeIndex
-            _this.updateZoom(nowZoom)
+      //       _this.fillStep = 2
+      //       _this.gridSizeIndex = nowGrideSizeIndex
+      //       _this.updateZoom(nowZoom)
 
-          }, 'image/png')
-        })
-      }, 500)
+      //     }, 'image/png')
+      //   })
+      // }, 500)
     },
-    saveImg () {
-      console.log(this)
-      savePSD(this.dWidgets)
+    saveImg() {
+      console.log(this);
+      savePSD(this.dWidgets);
       // console.log(this.dWidgets)
       // if (this.publishing) {
       //   return
@@ -599,8 +688,9 @@ export default {
       // this.publishing = false
     }
   }
-}
+};
 </script>
+
 
 <style lang="stylus">
 @import '~STYLUS/page-design-element-ui.styl'
@@ -819,3 +909,4 @@ export default {
           background-color: lighten($color-main, 10%)
 
 </style>
+

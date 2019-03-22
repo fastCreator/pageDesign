@@ -117,7 +117,7 @@ export default {
     padding-left:10px;
     .design-canvas
       position: relative
-      margin: 10px 0
+      margin: 10px auto
       background-repeat: no-repeat
       background-position: center
       background-size: cover
