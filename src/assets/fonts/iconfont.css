@@ -1,0 +1,88 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 616166 */
+  src: url('//at.alicdn.com/t/font_616166_je7dk6gylq4wvcxr.eot');
+  src: url('//at.alicdn.com/t/font_616166_je7dk6gylq4wvcxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_616166_je7dk6gylq4wvcxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_616166_je7dk6gylq4wvcxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_616166_je7dk6gylq4wvcxr.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-upload:before { content: "\e602"; }
+
+.icon-material:before { content: "\e600"; }
+
+.icon-italic:before { content: "\e615"; }
+
+.icon-add-img:before { content: "\e601"; }
+
+.icon-bold:before { content: "\e609"; }
+
+.icon-add:before { content: "\e641"; }
+
+.icon-sub:before { content: "\e643"; }
+
+.icon-redo:before { content: "\e6ed"; }
+
+.icon-selected:before { content: "\e60d"; }
+
+.icon-align-center-horiz:before { content: "\e654"; }
+
+.icon-align-center-verti:before { content: "\e658"; }
+
+.icon-align-right:before { content: "\e65b"; }
+
+.icon-align-left:before { content: "\e65c"; }
+
+.icon-ref-grid:before { content: "\e642"; }
+
+.icon-delete-x:before { content: "\e6f0"; }
+
+.icon-delete:before { content: "\e619"; }
+
+.icon-undo:before { content: "\e618"; }
+
+.icon-best-size:before { content: "\e613"; }
+
+.icon-arrow-left:before { content: "\e605"; }
+
+.icon-shape:before { content: "\e62f"; }
+
+.icon-save:before { content: "\e606"; }
+
+.icon-underline:before { content: "\e6d3"; }
+
+.icon-copy:before { content: "\e668"; }
+
+.icon-align-top:before { content: "\e64a"; }
+
+.icon-text:before { content: "\e649"; }
+
+.icon-align-bottom:before { content: "\e64c"; }
+
+.icon-line:before { content: "\e64b"; }
+
+.icon-publish:before { content: "\e6a0"; }
+
+.icon-layer-up:before { content: "\e709"; }
+
+.icon-pic:before { content: "\e67b"; }
+
+.icon-align-right-inside:before { content: "\e71d"; }
+
+.icon-align-center-inside:before { content: "\e71e"; }
+
+.icon-align-left-inside:before { content: "\e71f"; }
+
+.icon-paste:before { content: "\e603"; }
+
+.icon-ref-line:before { content: "\e61b"; }
+
+.icon-layer-down:before { content: "\e720"; }
